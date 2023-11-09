@@ -1,10 +1,10 @@
+import java.io.IOException;
 public class Main {
+    public static void main(String[] args) throws IOException {
+        Status action = new Status();
 
-    public static void main(String[] args) {
-        CoreOperations operations = new CoreOperations();
-
-        operations.questionLoop();
-        operations.findPartyWithHighestScore();
-        operations.printPartyScores();
+        action.questionLoop();
+        action.printPartyScores();
+        action.findPartyWithHighestScore();
     }
 }

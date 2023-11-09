@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 public class Party {
 
     private final String name;
@@ -18,5 +21,14 @@ public class Party {
 
     public void updateScore(int value) {
         score += value;
+    }
+
+    public static List<Party> createPartyObjects(List<String> partyNames) {
+        List<Party> partyList = new ArrayList<>();
+        for (String partyName : partyNames) {
+            Party party = new Party(partyName);
+            partyList.add(party);
+        }
+        return Collections.unmodifiableList(partyList);
     }
 }

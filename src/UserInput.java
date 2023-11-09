@@ -1,36 +1,42 @@
+import java.util.List;
 import java.util.Scanner;
-
 class UserInput {
 
-    Scanner scanner = new Scanner(System.in);
-    public Questions question = new Questions();
 
-    int response;
+    private final Scanner scanner = new Scanner(System.in);
 
-    public int getUserResponse(int i) {
+
+    public int getUserResponse(int i, List<String> questionTexts) {
         while (true) {
-
             prompt();
 
-            response = scanner.nextInt();
-            scanner.nextLine();
 
-            if (checkAnswer()) {
-                break;
+            if (scanner.hasNextInt()) {
+                int response = scanner.nextInt();
+                scanner.nextLine();
+                if (checkAnswer(response)) {
+                    return response;
+                } else {
+                    System.out.println("\nThis is wrong input (out of range), try again:\n");
+                }
             } else {
-                System.out.println("\nThis is wrong input (out of range), try again:\n");
-                System.out.println(question.questionTexts[i]);
+                scanner.nextLine();
+                System.out.println("\nInvalid input, please enter a number (1 or 2):\n");
             }
+
+
+            System.out.println(questionTexts.get(i)+"\n");
         }
-        return response;
     }
 
-    public void prompt(){
+
+    private void prompt() {
         System.out.println("1. Eens");
         System.out.println("2. Oneens\n");
     }
 
-    public boolean checkAnswer() {
+
+    private boolean checkAnswer(int response) {
         return response == 1 || response == 2;
     }
 }

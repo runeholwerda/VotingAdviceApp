@@ -1,20 +1,18 @@
 import java.util.List;
-import java.util.Scanner;
+public class Calculations {
+    private final List<Party> parties;
 
-class CoreOperations {
+    public Calculations(List<Party> parties) {
+        this.parties = parties;
+    }
 
-    public Scanner scanner;
-    public Questions question = new Questions();
-    public UserInput UserInput = new UserInput();
-    public List<Party> parties = question.parties;
-
-    public void questionLoop() {
-        for (int i = 0; i < question.questionTexts.length; i++) {
-
-            System.out.println("\n" + question.questionTexts[i] + "\n");
-
-            int response = UserInput.getUserResponse(i);
-            question.updateValues(parties, i, response);
+    public void updateValues(int questionIndex, int response, List<Integer> questionCalculations) {
+        for (int i = 0; i < parties.size(); i++) {
+            if (response == 1) {
+                parties.get(i).updateScore(questionCalculations.get(i));
+            } else if (response == 2) {
+                parties.get(i).updateScore(-questionCalculations.get(i));
+            }
         }
     }
 
@@ -28,7 +26,7 @@ class CoreOperations {
         }
         System.out.println("\nThe party with the highest score is: " + partyWithHighestScore.getName());
     }
-    
+
     public void printPartyScores() {
         System.out.println("\ntotal score:\n");
 
